@@ -1,0 +1,20 @@
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <linux/if_packet.h>
+#include<netinet/if_ether.h>
+#include <stdio.h>
+#include <string.h>
+
+
+int main(){
+
+char f;
+int fd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+int val = TPACKET_V3;
+setsockopt(fd, SOL_PACKET, PACKET_VERSION, &val, sizeof(val));
+f=getsockopt(fd, SOL_PACKET, PACKET_VERSION, &val, sizeof(val));
+printf("%d", val);
+if (f!=NULL){
+	printf("%d", val);
+}
+}

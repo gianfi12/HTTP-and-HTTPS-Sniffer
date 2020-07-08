@@ -1,0 +1,38 @@
+#include<stdio.h> //For standard things
+#include<stdlib.h>    //malloc
+#include<string.h>
+#include<sys/socket.h>
+#include<arpa/inet.h>
+
+int main()
+{
+	int sock_raw;
+    int saddr_size , data_size;
+    struct sockaddr saddr;
+    struct in_addr in;
+
+    unsigned char *buffer = (unsigned char *)malloc(65536); //Its Big!
+
+    sock_raw = socket(AF_INET , SOCK_RAW , IPPROTO_TCP);
+    if(sock_raw < 0)
+    {
+        printf("Socket Error\n");
+        return 1;
+    }
+    while(1)
+    {
+        saddr_size = sizeof saddr;
+        //Receive a packet
+
+        data_size = recvfrom(sock_raw , buffer , 65536 , 0 , &saddr , &saddr_size);
+        printf("%d",data_size);
+        if(data_size <0 )
+        {
+            printf("Recv from error , failed to get packets\n");
+            return 1;
+        }
+    }
+    close(sock_raw);
+    printf("Finished");
+    return 0;
+}

@@ -1,0 +1,13 @@
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <linux/if_packet.h>
+#include<netinet/if_ether.h>
+
+
+int main(){
+
+int fd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_ALL));
+int val = 2;
+setsockopt(fd, SOL_PACKET, PACKET_VERSION, &val, sizeof(val));
+getsockopt(fd, SOL_PACKET, PACKET_VERSION, &val, sizeof(val));
+}

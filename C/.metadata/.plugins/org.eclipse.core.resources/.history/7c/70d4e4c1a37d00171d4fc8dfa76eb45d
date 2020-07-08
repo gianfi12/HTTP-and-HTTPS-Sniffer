@@ -1,0 +1,3 @@
+ int val = tpacket_version;
+ setsockopt(fd, SOL_PACKET, PACKET_VERSION, &val, sizeof(val));
+ getsockopt(fd, SOL_PACKET, PACKET_VERSION, &val, sizeof(val));

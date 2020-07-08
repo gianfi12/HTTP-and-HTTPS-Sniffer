@@ -1,0 +1,6 @@
+#include <sys/socket.h>
+
+
+int val = TPACKET_V3;
+ setsockopt(fd, SOL_PACKET, PACKET_VERSION, &val, sizeof(val));
+ getsockopt(fd, SOL_PACKET, PACKET_VERSION, &val, sizeof(val));
